@@ -13,12 +13,12 @@ if response.status_code == 200:
     writer = csv.writer(file)
     writer.writerow(["Cellphone", "Price", "Url"])
     for element in elements:
-        title = element.find('h2', class_="poly-box poly-component__title")
-        price = element.find('span', class_="andes-money-amount andes-money-amount--cents-superscript")
-        path = element.find('a')
+        title = element.find('h2', class_="poly-box poly-component__title").getText()
+        price = element.find('span', class_="andes-money-amount andes-money-amount--cents-superscript").getText()
+        path = element.find('a').get('href')
         
         if title:
-            writer.writerow([title.text.strip(), price.text.strip(), path['href'] ])
+            writer.writerow([title, price, path ])
 
 else: 
     print(f"No open website, code: {response.status_code}")
